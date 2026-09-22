@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class=" flex items-center justify-center"> <div class="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl">
+<h2 class="mb-6 text-center text-3xl font-bold text-gray-900">Login</h2>
+
+<form action="{% url 'login' %}" method="POST" class="space-y-5">
+  {% csrf_token %} {% comment %} {{form.as_p}} {% endcomment %}
+
+  <p class="text-gray-700">
+    <label class="mb-2 block font-medium">Username</label>
+    <input type="text" name="username"
+      class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-red-500 focus:ring-2 focus:ring-red-200" />
+  </p>
+
+  <p class="text-gray-700">
+    <label class="mb-2 block font-medium">Password</label>
+    <input type="password" name="password"
+      class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-red-500 focus:ring-2 focus:ring-red-200" />
+  </p>
+
+  <button type="submit"
+    class="w-full rounded-lg bg-red-600 px-4 py-3 font-semibold text-white transition hover:bg-red-700">
+    Login
+  </button>
+</form>
+
+</div> </div>
+
+{% endblock %}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500
+             flex items-center justify-center p-6">
+
+    <div class="w-full max-w-md">
+
+        <!-- Card -->
+        <div class="bg-white/95 backdrop-blur-lg
+                    rounded-3xl shadow-2xl p-8
+                    hover:-translate-y-2
+                    transition-all duration-300">
+
+            <!-- Profile Icon -->
+            <div class="flex justify-center mb-6">
+
+                <div class="w-20 h-19
+                            rounded-full
+                            bg-gradient-to-r from-blue-500 to-purple-600
+                            flex items-center justify-center
+                            text-white text-4xl font-bold
+                            shadow-lg">
+
+                    {{ student.name|first|upper }}
+
+                </div>
+
+            </div>
+
+            <!-- Heading -->
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-2">
+                Student Details
+            </h2>
+
+            <p class="text-gray-500 text-center mb-8">
+                Information about the student
+            </p>
+
+
+            <!-- Student Information -->
+
+            <div class="space-y-4">
+
+                <!-- Name -->
+                <div class="bg-blue-50 rounded-xl p-4
+                            hover:bg-blue-100 transition">
+
+                    <p class="text-sm text-blue-600 font-semibold">
+                        Name
+                    </p>
+
+                    <p class="text-lg font-bold text-gray-800">
+                        {{ student.name }}
+                    </p>
+
+                </div>
+
+
+                <!-- Age -->
+                <div class="bg-purple-50 rounded-xl p-4
+                            hover:bg-purple-100 transition">
+
+                    <p class="text-sm text-purple-600 font-semibold">
+                        Age
+                    </p>
+
+                    <p class="text-lg font-bold text-gray-800">
+                        {{ student.age }}
+                    </p>
+
+                </div>
+
+
+                <!-- Email -->
+                <div class="bg-pink-50 rounded-xl p-4
+                            hover:bg-pink-100 transition">
+
+                    <p class="text-sm text-pink-600 font-semibold">
+                        Email
+                    </p>
+
+                    <p class="text-lg font-bold text-gray-800 break-words">
+                        {{ student.email }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Back Button -->
+            <a
+                href="{% url 'student_list' %}"
+                class="mt-8 w-full
+                       inline-flex items-center justify-center gap-2
+                       bg-gradient-to-r from-blue-600 to-purple-600
+                       text-white font-semibold
+                       py-3 px-6
+                       rounded-xl
+                       shadow-lg
+                       hover:shadow-xl
+                       hover:scale-[1.02]
+                       active:scale-95
+                       transition-all duration-200"
+            >
+                <span>←</span>
+                Back to Student List
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

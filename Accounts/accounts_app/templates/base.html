@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>auth demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-gray-100 text-gray-900">
+    <nav class="border-b border-gray-200 bg-white shadow-sm">
+      <div
+        class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <h1 class="text-xl font-bold text-red-600">Auth Demo</h1>
+
+        <div class="text-sm">
+          {% if messages %}
+          <ul class="mb-2">
+            {% for m in messages %}
+            <li class="rounded-lg bg-green-100 px-4 py-2 text-green-700">
+              {{m}}
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %} {% if user.is_authenticated %}
+          <span class="font-medium text-gray-700">
+            Hello 👋 {{user.username}}
+          </span>
+
+          <span class="mx-2 text-gray-400">|</span>
+
+          <a
+            href="{% url 'logout' %}"
+            class="font-medium text-red-600 hover:text-red-700"
+          >
+            Logout
+          </a>
+
+          {% else %}
+
+          <a
+            href="{% url 'login' %}"
+            class="font-medium text-blue-600 hover:text-blue-700"
+          >
+            Login
+          </a>
+
+          <span class="mx-2 text-gray-400">|</span>
+
+          <a
+            href="{% url 'register' %}"
+            class="font-medium text-red-600 hover:text-red-700"
+          >
+            Register
+          </a>
+
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <main class="mx-auto max-w-7xl px-6 py-10">
+      {% block content %} {% endblock %}
+    </main>
+  </body>
+</html>
