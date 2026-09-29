@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #1f2937;
+            margin-bottom: 25px;
+        }
+
+        .posts {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .post {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .post-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d62ad;
+            margin-bottom: 8px;
+        }
+
+        .post-content {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .empty {
+            text-align: center;  
+            color: #6b7280;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 30px;
+        }
+
+        .pagination a,
+        .pagination span {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            border: 1px solid #d1d5db;
+            background-color: white;
+            color: #374151;
+            transition: 0.2s;
+        }
+
+        .pagination a:hover {
+            background-color: #eff6ff;
+            color: #2563eb;
+            border-color: #2563eb;
+        }
+
+        .pagination .active {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px 15px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .pagination a,
+            .pagination span {
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Blog Posts</h1>
+
+        <ul class="posts">
+
+            {% for post in page_obj %}
+
+                <li class="post">
+                    <div class="post-title">
+                        {{ post.title }}
+                    </div>
+
+                    <div class="post-content">
+                        {{ post.content }}
+                    </div>
+                </li>
+
+            {% empty %}
+
+                <li class="empty">
+                    No blog posts found.
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+
+        <!-- Pagination -->
+        <div class="pagination">
+
+            {% if page_obj.has_previous %}
+
+                <a href="?page=1">
+                    First
+                </a>
+
+                <a href="?page={{ page_obj.previous_page_number }}">
+                    Previous
+                </a>
+
+            {% endif %}
+
+
+            {% for num in page_obj.paginator.page_range %}
+
+                {% if page_obj.number == num %}
+
+                    <span class="active">
+                        {{ num }}
+                    </span>
+
+                {% else %}
+
+                    <a href="?page={{ num }}">
+                        {{ num }}
+                    </a>
+
+                {% endif %}
+
+            {% endfor %}
+
+
+            {% if page_obj.has_next %}
+
+                <a href="?page={{ page_obj.next_page_number }}">
+                    Next
+                </a>
+
+                <a href="?page={{ page_obj.paginator.num_pages }}">
+                    Last
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+</html>
